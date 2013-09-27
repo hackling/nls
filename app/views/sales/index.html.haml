@@ -12,8 +12,8 @@
           %table.unstyled{:width => '100%'}
             %tr
               %td
-                %a.toggle{:href => 'javascript:;'} Show Totals
-            %tr.togglable{:style => 'display: none;'}
+                %span{"data-toggle" => "##{dom_id(sale)}", :class => "btn"} Show Totals
+            %tr.togglable{:style => 'display: none;', :id => dom_id(sale)}
               %td
                 %table.totals.table-bordered
                   - sale.transaction_totals.each do |trans_type, trans_total|
@@ -26,5 +26,5 @@
 
 :coffee
   $ ->
-    $('a.toggle').click ->
-      $('.togglable').toggle(!$('.togglable').is(':visible'))
+    $('[data-toggle]').click ->
+      $($(this).data("toggle")).toggle()
