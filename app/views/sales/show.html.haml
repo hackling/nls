@@ -1,0 +1,18 @@
+.page-header
+  = link_to sales_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to edit_sale_path(@sale), :class => 'btn btn-primary' do
+    %i.icon-pencil.icon-white
+    Edit
+  %h1 Listing sales
+
+.container
+  %table
+    - Transaction.where(:sale_id => @sale.id).each do |transaction|
+      %tr
+        %td= transaction.seller.name
+        %td= transaction.transaction_type
+        %td= transaction.amount
+
+%dl

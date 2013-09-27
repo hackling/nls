@@ -1,0 +1,37 @@
+%h2 Sales vs. Trades
+.chart
+  %canvas{:id => 'sales-vs-trades', :height => '700', :width => '1024'}
+
+%h2 Sales by Seller
+.chart
+  %canvas{:id => 'sales-by-seller', :height => '700', :width => '1024'}
+
+:javascript
+  var salesVsTrades = {
+    labels : #{chart_sales_vs_trades[:labels]},
+    datasets : [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : #{chart_sales_vs_trades['Selling']}
+      },
+      {
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,1)",
+        pointColor : "rgba(151,187,205,1)",
+        pointStrokeColor : "#fff",
+        data : #{chart_sales_vs_trades['Trading']}
+      }
+    ]
+  }
+  var myLine = new Chart(document.getElementById("sales-vs-trades").getContext("2d")).Line(salesVsTrades);
+
+  var salesBySeller = {
+    labels : #{chart_sales_by_seller[:labels]},
+    datasets : [
+    #{data_sets}
+    ]
+  }
+  var myLine = new Chart(document.getElementById("sales-by-seller").getContext("2d")).Line(salesBySeller);

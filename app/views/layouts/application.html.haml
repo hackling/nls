@@ -1,0 +1,47 @@
+!!!5
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title Next Level Sales
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+
+    / Le HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar{:"data-toggle" => "collapse", :"data-target" => ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => new_sale_path} Next Level Sales
+          .nav-collapse
+            %ul.nav
+              %li.active
+                %a{:href => new_sale_path} New Sales
+              %li
+                %a{:href => sales_path} Sales List
+              %li
+                %a{:href => metrics_path} Metrics
+              %li
+                %a{:href => sellers_path} Sellers
+            %p.navbar-text.pull-right
+    .container-fluid
+      .row-fluid
+        -# .span2
+        .span12
+          - flash.each do |name, msg|
+            = content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do
+              %a.close{:href => "#", :"data-dismiss" => "alert"} ×
+              = msg
+          = yield
+      %hr
+      %footer
+        %p &copy; Next Level Games 2013

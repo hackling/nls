@@ -1,0 +1,16 @@
+.page-header
+  = link_to transactions_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to edit_transaction_path(@transaction), :class => 'btn btn-primary' do
+    %i.icon-pencil.icon-white
+    Edit
+  %h1 Listing transactions
+
+%dl
+  %dt Seller:
+  %dd= @transaction.seller
+  %dt Transaction type:
+  %dd= @transaction.transaction_type
+  %dt Amount:
+  %dd= @transaction.amount

@@ -1,0 +1,16 @@
+- Sellers.all do |seller|
+  = simple_form_for(@transaction, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f|
+    = f.error_notification
+
+    .form-inputs
+      %table
+        %tr
+          %td
+            = f.association :seller, :label => false, :default => seller.name
+          %td
+            = f.association :transaction_type, :default => 'Selling', :label => false
+          %td
+            = f.input :amount, :label => false
+
+  .form-actions
+    = f.button :submit, :class => "btn-primary"

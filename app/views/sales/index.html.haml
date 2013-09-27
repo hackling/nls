@@ -1,0 +1,30 @@
+.page-header
+  = link_to new_sale_path, :class => 'btn btn-primary' do
+    %i.icon-plus.icon-white
+    New Sale
+  %h1 Listing sales
+
+%table.table.table-bordered.table-striped
+  %tbody
+    - @sales.order_by_time.each do |sale|
+      %tr
+        %td{:width => '200px'}
+          %table.unstyled{:width => '100%'}
+            %tr
+              %td
+                %a.toggle{:href => 'javascript:;'} Show Totals
+            %tr.togglable{:style => 'display: none;'}
+              %td
+                %table.totals.table-bordered
+                  - sale.transaction_totals.each do |trans_type, trans_total|
+                    %tr
+                      %th= trans_type
+                      %td= number_to_currency(trans_total)
+        %td{:width => '100px'}= link_to 'Edit', edit_sale_path(sale)
+        %td{:width => '100px'}= link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete
+        %td{:width => '100px'}= sale.created_at.strftime('%l:%M %P %a %d %b %Y')
+
+:coffee
+  $ ->
+    $('a.toggle').click ->
+      $('.togglable').toggle(!$('.togglable').is(':visible'))

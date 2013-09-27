@@ -1,0 +1,12 @@
+.page-header
+  = link_to sellers_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to edit_seller_path(@seller), :class => 'btn btn-primary' do
+    %i.icon-pencil.icon-white
+    Edit
+  %h1 Listing sellers
+
+%dl
+  %dt Name:
+  %dd= @seller.name

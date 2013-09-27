@@ -1,0 +1,16 @@
+= simple_form_for(@sale) do |f|
+  = f.error_notification
+
+  .form-inputs
+    %table.sales-form
+      = f.simple_fields_for :transactions do |t|
+        %tr
+          %td
+            = t.association :seller, :label => false
+          %td
+            = t.input :transaction_type, :label => false
+          %td
+            = t.input :amount, :label => false
+
+  .form-actions
+    = f.button :submit, :class => "btn-primary"

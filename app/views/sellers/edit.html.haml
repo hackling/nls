@@ -1,0 +1,10 @@
+.page-header
+  = link_to sellers_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to @seller, :class => 'btn btn-primary' do
+    %i.icon-info-sign.icon-white
+    Show
+  %h1 Editing seller
+
+= render 'form'

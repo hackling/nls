@@ -1,0 +1,25 @@
+.page-header
+  = link_to new_transaction_path, :class => 'btn btn-primary' do
+    %i.icon-plus.icon-white
+    New Transaction
+  %h1 Listing transactions
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Seller
+      %th Transaction type
+      %th Amount
+      %th
+      %th
+      %th
+
+  %tbody
+    - @transactions.each do |transaction|
+      %tr
+        %td= transaction.seller
+        %td= transaction.transaction_type
+        %td= transaction.amount
+        %td= link_to 'Show', transaction
+        %td= link_to 'Edit', edit_transaction_path(transaction)
+        %td= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete

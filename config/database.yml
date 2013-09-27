@@ -1,0 +1,24 @@
+postgresql: &postgresql
+  adapter: postgresql
+  encoding: utf8
+  min_messages: warning
+  pool: 5
+  # host: localhost
+  # port: 5432
+  username: <%= ENV['USER'] %>
+  # password:
+
+development:
+  <<: *postgresql
+  database: nls_development<%= ENV['DB_SUFFIX'] %>
+
+production:
+  <<: *postgresql
+  database: nls_production<%= ENV['DB_SUFFIX'] %>
+
+test: &TEST
+  <<: *postgresql
+  database: nls_test<%= ENV['DB_SUFFIX'].to_s + ENV['TEST_ENV_NUMBER'].to_s %>
+
+cucumber:
+  <<: *TEST
