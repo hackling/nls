@@ -5,7 +5,7 @@ module KnowsHowToSell
     end
 
     def sales
-      @sales ||= Sales.new
+      @sales ||= SalesPage.new
     end
 
     def profit

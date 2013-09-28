@@ -4,15 +4,17 @@ Feature: Data model makes sense
   So I don't feel like a chump
 
   Background:
-    Given A seller named "Nick"
+    Given The store exists
+    And A seller named "Nick"
     And A seller named "Will"
 
   Scenario: Nick and Will trade
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
     When "Will" trades for $100 worth of cards for $62.50 of his cards
     Then The contributions should be
-      | Nick | $62.50 |
-      | Will | $62.50 |
+      | Store | $0     |
+      | Nick  | $62.50 |
+      | Will  | $62.50 |
 
   Scenario: Nick and Will trade and the store buys
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
@@ -49,6 +51,6 @@ Feature: Data model makes sense
       | Store | $50    |
     And The cash profit is $100
     And The profit is distributed
-      | Nick  | $84.75  |
+      | Nick  | $84.75 |
       | Will  | $ 8.47 |
       | Store | $ 6.78 |

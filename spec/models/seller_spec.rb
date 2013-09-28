@@ -30,6 +30,15 @@ describe Seller do
 
   let(:store) { Seller.where(name: "Store").first }
 
+  describe '.for_sale_form' do
+    let(:will) { Seller.where(name: "Will").first }
+
+    it 'should return in order with store first' do
+      expect(Seller.for_sale_form.first).to eq store
+      expect(Seller.for_sale_form.last).to eq will
+    end
+  end
+
   describe ".store?" do
     it "should be true for the Store" do
       expect(Seller.find_by_name("Store").store?).to be_true

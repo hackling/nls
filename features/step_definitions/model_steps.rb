@@ -1,3 +1,7 @@
+Given(/^The store exists$/) do
+  app.store
+end
+
 Given(/^A seller named "(.*?)"$/) do |name|
   Seller.create! name: name
 end

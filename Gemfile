@@ -39,6 +39,11 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'capybara-webkit'
+  gem 'site_prism'
+  gem 'launchy'
 end
 
 gem 'jquery-rails'

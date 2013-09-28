@@ -20,4 +20,11 @@ class Seller < ActiveRecord::Base
   def store?
     name == "Store"
   end
+
+  scope :partners, -> { where('name <> ?', 'Store') }
+
+  # TODO: spec me
+  def self.for_sale_form
+    [store] + partners
+  end
 end

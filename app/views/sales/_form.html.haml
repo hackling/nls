@@ -1,16 +1,32 @@
+:sass
+  .sales-form .control-group
+    margin: 0
+
 = simple_form_for(@sale) do |f|
   = f.error_notification
 
+
   .form-inputs
-    %table.sales-form
-      = f.simple_fields_for :transactions do |t|
+    %table.sales-form.table.table-striped
+      %thead
         %tr
+          %th Seller
+          %th Sale
+          %th Trade
+          %th Buy
+      - Seller.for_sale_form.each do |seller|
+        %tr
+          %th= seller.name
           %td
-            = t.association :seller, :label => false
+            = render partial: "sale_field", locals: { f: f, seller: seller, type: "Selling" }
           %td
-            = t.input :transaction_type, :label => false
-          %td
-            = t.input :amount, :label => false
+            = render partial: "sale_field", locals: { f: f, seller: seller, type: "Trading" }
+          %td{:style => 'text-align: center;'}
+            - if seller.store?
+              = render partial: "sale_field", locals: { f: f, seller: seller, type: "Buying" }
+            - else
+              &mdash;
+
 
   .form-actions
     = f.button :submit, :class => "btn-primary"
