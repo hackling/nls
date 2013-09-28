@@ -6,27 +6,22 @@ Feature: Data model makes sense
   Background:
     Given A seller named "Nick"
     And A seller named "Will"
-      
 
   Scenario: Nick and Will trade
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
     When "Will" trades for $100 worth of cards for $62.50 of his cards
     Then The contributions should be
-      | Nick | 62.50 |
-      | Will | 62.50 |
+      | Nick | $62.50 |
+      | Will | $62.50 |
 
   Scenario: Nick and Will trade and the store buys
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
     And  "Will" trades for $100 worth of cards for $62.50 of his cards
     And  The store buys $100 worth of cards for $50
     Then The contributions should be
-      | Nick  | 62.50 |
-      | Will  | 62.50 |
-      | Store | 50    |
-    And The card distribution is
-      | Nick  | $107 |
-      | Will  | $107 |
-      | Store | $86  |
+      | Nick  | $62.50 |
+      | Will  | $62.50 |
+      | Store | $50    |
 
   Scenario: Nick and Will trade and the store buys
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
@@ -34,13 +29,9 @@ Feature: Data model makes sense
     And  The store buys $100 worth of cards for $50
     And  The store sells $150 worth of cards
     Then The contributions should be
-      | Nick  | 62.50 |
-      | Will  | 62.50 |
-      | Store | 50    |
-    And The card distribution is
-      | Nick  | $53.5 |
-      | Will  | $53.5 |
-      | Store | $43   |
+      | Nick  | $62.50 |
+      | Will  | $62.50 |
+      | Store | $50    |
     And The cash profit is $100
     And The profit is distributed
       | Nick  | $35.71 |
@@ -53,13 +44,9 @@ Feature: Data model makes sense
     And  The store buys $100 worth of cards for $50
     And  The store sells $150 worth of cards
     Then The contributions should be
-      | Nick  | 625   |
-      | Will  | 62.50 |
-      | Store | 50    |
-    And The card distribution is
-      | Nick  | $889     | 
-      | Will  | $88.9    |
-      | Store | $71.19   |
+      | Nick  | $625   |
+      | Will  | $62.50 |
+      | Store | $50    |
     And The cash profit is $100
     And The profit is distributed
       | Nick  | $84.75  |
