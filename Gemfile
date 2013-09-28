@@ -36,6 +36,9 @@ group :development, :test do
   gem 'pry-nav'                                                 # Debugger navigation extension
   gem 'pry-rails'                                               # Use "pry" with Rails
   gem 'zeus', :require => false                                 # Rails aware forking server
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rspec-rails'
 end
 
 gem 'jquery-rails'
