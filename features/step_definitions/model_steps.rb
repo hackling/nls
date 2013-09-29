@@ -1,3 +1,7 @@
+Given(/^I have logged in$/) do
+  page.driver.header 'Authorization', basic_auth_for_app
+end
+
 Given(/^The store exists$/) do
   app.store
 end
@@ -8,16 +12,6 @@ end
 
 When(/^"(.*?)" trades for \$(\d+) worth of cards for \$([\d.]+) of his cards$/) do |seller, value_gained, value_given|
   app.sales.trade(seller, value_given)
-end
-
-# Process a hash and transform the values into BigDecimals,
-# removing "$" signs
-def bd_hash hash
-  Hash[
-    hash.map do |k, v|
-      [k, BigDecimal.new(v.gsub("$",''))]
-    end
-  ]
 end
 
 Then(/^The contributions should be$/) do |table|

@@ -9,6 +9,7 @@ gem 'inherited_resources'
 gem 'bootstrap-generators'
 gem 'simple_form'
 gem 'activerecord_views'
+gem 'dotenv-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

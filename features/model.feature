@@ -7,6 +7,7 @@ Feature: Data model makes sense
     Given The store exists
     And A seller named "Nick"
     And A seller named "Will"
+    And I have logged in
 
   Scenario: Nick and Will trade
     When "Nick" trades for $100 worth of cards for $62.50 of his cards
