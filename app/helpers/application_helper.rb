@@ -18,12 +18,11 @@ module ApplicationHelper
     end
   end
 
+  def money_or_your_dash amount
+    (amount && amount > 0) && number_to_currency(amount) || "&ndash;".html_safe
+  end
+
   def money_for transactions
-    t = transactions.first.try(:amount)
-    if t
-      number_to_currency t
-    else
-      "&ndash;".html_safe
-    end
+    money_or_your_dash transactions.first.try(:amount)
   end
 end
