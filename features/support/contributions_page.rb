@@ -1,6 +1,7 @@
 class ContributionSection < SitePrism::Section
   element :name, 'th.name'
   element :contribution, 'td.contribution'
+  element :percent, 'td.percent'
 end
 
 class ContributionPage < SitePrism::Page

@@ -12,6 +12,22 @@ class Seller < ActiveRecord::Base
     Hash[contributions]
   end
 
+  def self.total_contributions
+    Transaction.where(seller_id: Seller.the_store).purchases.sum(:amount) +
+    Transaction.where(seller_id: Seller.partners).trades.sum(:amount)
+  end
+
+  def self.all_total_contributions_with_percentages
+    total = total_contributions
+    Seller.all.map do |seller|
+      [
+        seller.name,
+        seller.total_contributions,
+        seller.total_contributions / total * 100,
+      ]
+    end
+  end
+
   def total_contributions
     if store?
       transactions.purchases.sum(:amount)
@@ -29,6 +45,7 @@ class Seller < ActiveRecord::Base
   end
 
   scope :partners, -> { where('name <> ?', 'Store') }
+  scope :the_store, -> { where(name: 'Store') }
 
   def self.for_sale_form
     [store] + partners

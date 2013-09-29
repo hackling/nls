@@ -19,8 +19,8 @@ module KnowsHowToSell
     def contributions_hash
       contributions.load
       Hash[
-        Seller.all.map do |seller|
-          [seller.name, contributions.contribution_for(seller.name)]
+        contributions.seller_contributions.map do |row|
+          [ row.name.text, BigDecimal.new(row.contribution.text) ]
         end
       ]
     end
@@ -34,17 +34,18 @@ module KnowsHowToSell
 
     private
 
-    def percentages
-      contributions = Seller.all.map { |x| [x.name, x.total_contributions] }
-      total_contributions = contributions.map(&:last).sum
-      percentages = contributions.map do |name, contribution|
-        [ name, (contribution / total_contributions) ]
-      end
+    def percentages_hash
+      contributions.load
+      Hash[
+        contributions.seller_contributions.map do |row|
+          [ row.name.text, BigDecimal.new(row.percent.text) / 100 ]
+        end
+      ]
     end
 
     def distribution_of profit
       Hash[
-      percentages.map do |name, percent|
+      percentages_hash.map do |name, percent|
         [name, (profit * percent).round(2)]
       end
       ]

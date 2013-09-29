@@ -72,6 +72,20 @@ describe Seller do
       end
     end
 
+    def bd s
+      BigDecimal.new s
+    end
+
+    context ".all_total_contributions_with_percentages" do
+      it "should return an array with contributions and percentages" do
+        expect(Seller.all_total_contributions_with_percentages).to eq([
+          ["Store", bd("50.0"),  bd("25")],
+          ["Nick",  bd("125.0"), bd("62.5")],
+          ["Will",  bd("25.0"),  bd("12.5")],
+        ])
+      end
+    end
+
     context "the Store" do
       let(:seller_name) { "Store" }
 
