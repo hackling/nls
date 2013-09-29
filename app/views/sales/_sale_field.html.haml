@@ -3,4 +3,4 @@
     %div{:"data-transaction-type" => transaction.transaction_type, :"data-seller" => transaction.seller.name}
       = t.input :seller_id, :as => :hidden
       = t.input :transaction_type, :as => :hidden
-      = t.input :amount, :label => false, input_html: { pattern: '\d*' }
+      .amount= t.input :amount, :label => false, input_html: { pattern: '\d*' }

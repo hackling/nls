@@ -54,3 +54,19 @@ Feature: Data model makes sense
       | Nick  | $84.75 |
       | Will  | $ 8.47 |
       | Store | $ 6.78 |
+
+  @javascript
+  Scenario: Entering Data
+    When I go to the selling page
+    When "Nick" sells $20
+    Then the total sold should be $20
+    When "Will" sells $30
+    Then the total sold should be $50
+
+    When "Nick" trades $10
+    Then the total traded should be $10
+    When "Will" trades $20
+    Then the total traded should be $30
+
+    When "Store" buys $13
+    Then the total bought should be $13

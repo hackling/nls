@@ -25,6 +25,30 @@
               = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Buying', seller) }
             - else
               &mdash;
+      %tr.totals
+        %td
+        %td.total.selling
+          0
+        %td.total.trading
+          0
+        %td.total.buying
+          0
 
   .form-actions
     = f.button :submit, :class => "btn-primary"
+
+:coffee
+  $ ->
+    updateTotalsForType = (ttype) ->
+      sum = 0
+      $('[data-transaction-type=' + ttype + '] .amount input').each ->
+        sum += Number($(this).val())
+      $(".total." + ttype.toLowerCase()).text sum
+
+    updateTotalsForType "Buying"
+    updateTotalsForType "Selling"
+    updateTotalsForType "Trading"
+
+    $('.amount input').keyup ->
+      ttype = $(this).closest('[data-transaction-type]').data('transaction-type')
+      updateTotalsForType(ttype)

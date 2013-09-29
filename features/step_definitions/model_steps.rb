@@ -39,3 +39,15 @@ end
 Then(/^The profit is distributed$/) do |table|
   expect(app.profit_distribution).to eq bd_hash(table.rows_hash)
 end
+
+When(/^"(.*?)" (sells|trades|buys) \$(\d+)$/) do |seller, action, amount|
+  app.sales.enter_amount(seller, action, amount)
+end
+
+Then(/^the total (sold|traded|bought) should be \$(\d+)$/) do |action, amount|
+  expect(app.sales.total_for action).to eq amount
+end
+
+When(/^I go to the selling page$/) do
+  app.sales.load
+end
