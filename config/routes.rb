@@ -4,6 +4,8 @@ Nls2::Application.routes.draw do
 
   root :to => 'sales#new'
 
+  match 'contributions' => 'sellers#contributions'
+
   resources :sellers
   resources :metrics
   # The priority is based upon order of creation:

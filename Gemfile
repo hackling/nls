@@ -1,11 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
+gem 'unicorn'
 
 gem 'haml-rails'
 gem 'inherited_resources'
@@ -36,6 +33,14 @@ group :development, :test do
   gem 'pry-nav'                                                 # Debugger navigation extension
   gem 'pry-rails'                                               # Use "pry" with Rails
   gem 'zeus', :require => false                                 # Rails aware forking server
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'capybara-webkit'
+  gem 'site_prism'
+  gem 'launchy'
 end
 
 gem 'jquery-rails'
@@ -54,3 +59,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+group :production do
+  gem 'rails_12factor'
+end

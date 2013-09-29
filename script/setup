@@ -1,0 +1,18 @@
+#!/bin/sh
+
+APP_PORT=4000
+
+# Set up Rails app.
+
+bundle install --path=vendor/gems --without=production
+
+echo "Configuring database"
+cp -v config/database.yml.example config/database.yml
+
+bundle exec rake db:setup
+
+echo "Setting environment variables"
+cp .env.example .env
+
+# Set up configurable environment variables for Foreman
+echo "port: $APP_PORT" > .foreman
