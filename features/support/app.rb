@@ -52,28 +52,6 @@ module KnowsHowToSell
     end
   end
 
-  class Sales
-    def trade seller_name, amount
-      seller = Seller.where(name: seller_name).first or fail "can't find seller named: #{seller}"
-      sale = Sale.new
-      sale.transactions.build seller: seller, transaction_type: "Trading", amount: amount
-      sale.save!
-    end
-
-    def buy money_offered
-      sale = Sale.new
-      sale.transactions.build seller: Seller.store, transaction_type: 'Buying', amount: money_offered
-      sale.save!
-    end
-
-    def sell seller_name, money_gained
-      seller = Seller.where(name: seller_name).first_or_create!
-      sale = Sale.new
-      sale.transactions.build seller: seller, transaction_type: 'Selling', amount: money_gained
-      sale.save!
-    end
-  end
-
   def app
     @app ||= App.new
   end
