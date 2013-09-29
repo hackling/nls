@@ -1,11 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
+gem 'unicorn'
 
 gem 'haml-rails'
 gem 'inherited_resources'
@@ -62,3 +59,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+group :production do
+  gem 'rails_12factor'
+end

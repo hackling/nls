@@ -15,3 +15,6 @@
 /tmp
 /bin
 .envrc
+/.env
+/config/database.yml
+/.foreman
