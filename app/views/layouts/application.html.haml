@@ -24,14 +24,11 @@
           %a.brand{:href => new_sale_path} Next Level Sales
           .nav-collapse
             %ul.nav
-              %li.active
-                %a{:href => new_sale_path} New Sales
-              %li
-                %a{:href => sales_path} Sales List
-              %li
-                %a{:href => metrics_path} Metrics
-              %li
-                %a{:href => sellers_path} Sellers
+              = navbar_li "New Sales", new_sale_path
+              = navbar_li "Sales List", sales_path
+              = navbar_li "Metrics", metrics_path
+              = navbar_li "Sellers", sellers_path
+              = navbar_li "Contributions", contributions_path
             %p.navbar-text.pull-right
     .container-fluid
       .row-fluid
