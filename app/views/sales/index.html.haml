@@ -4,27 +4,35 @@
     New Sale
   %h1 Listing sales
 
-%table.table.table-bordered.table-striped
-  %tbody
-    - @sales.order_by_time.each do |sale|
-      %tr
-        %td{:width => '200px'}
-          %table.unstyled{:width => '100%'}
-            %tr
-              %td
-                %span{"data-toggle" => "##{dom_id(sale)}", :class => "btn"} Show Totals
-            %tr.togglable{:style => 'display: none;', :id => dom_id(sale)}
-              %td
-                %table.totals.table-bordered
-                  - sale.transaction_totals.each do |trans_type, trans_total|
-                    %tr
-                      %th= trans_type
-                      %td= number_to_currency(trans_total)
-        %td{:width => '100px'}= link_to 'Edit', edit_sale_path(sale)
-        %td{:width => '100px'}= link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete
-        %td{:width => '100px'}= sale.created_at.strftime('%l:%M %P %a %d %b %Y')
-
-:coffee
-  $ ->
-    $('[data-toggle]').click ->
-      $($(this).data("toggle")).toggle()
+%table.table-sales
+  %thead
+    %tr
+      %th
+      %th Time
+      %th Sell
+      %th Trade
+      %th Buy
+      %th
+  - @sales.order_by_time.each_with_index do |sale, i|
+    %tbody
+      %tr{:class => (i % 2 == 1 ? "alt" : "")}
+        %td
+          %span{:"data-toggle" => ".#{dom_id(sale)}"}
+            %i.icon.icon-chevron-right.toggleon
+            %i.icon.icon-chevron-down.toggleoff
+        %td= link_to sale_time(sale), sale
+        - sale.transaction_totals.each do |trans_type, trans_total|
+          %td
+            %span= number_to_currency(trans_total)
+        %td.actions{:width => '100px'}
+          = link_to edit_sale_path(sale), class: "btn btn-mini" do
+            %i.icon.icon-edit
+          = link_to sale, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger btn-mini" do
+            %i.icon.icon-trash
+      - sale.transactions.group_by(&:seller).each do |seller, transactions|
+        %tr{:class => "details hide #{dom_id(sale)} #{i % 2 == 1 ? "alt" : ""}"}
+          %td.seller{:colspan => "2"}= seller.name
+          %td= money_for transactions.select(&:sale?)
+          %td= money_for transactions.select(&:trade?)
+          %td= money_for transactions.select(&:buy?)
+          %td
