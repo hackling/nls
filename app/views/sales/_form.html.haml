@@ -5,7 +5,6 @@
 = simple_form_for(@sale) do |f|
   = f.error_notification
 
-
   .form-inputs
     %table.sales-form.table.table-striped
       %thead
@@ -18,15 +17,14 @@
         %tr
           %th= seller.name
           %td
-            = render partial: "sale_field", locals: { f: f, seller: seller, type: "Selling" }
+            = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Selling', seller) }
           %td
-            = render partial: "sale_field", locals: { f: f, seller: seller, type: "Trading" }
+            = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Trading', seller) }
           %td{:style => 'text-align: center;'}
             - if seller.store?
-              = render partial: "sale_field", locals: { f: f, seller: seller, type: "Buying" }
+              = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Buying', seller) }
             - else
               &mdash;
-
 
   .form-actions
     = f.button :submit, :class => "btn-primary"

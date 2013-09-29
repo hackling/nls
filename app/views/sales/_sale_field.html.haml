@@ -1,7 +1,6 @@
-- obj = f.object.transactions.find { |t| t.transaction_type == type && t.seller == seller }
-- if obj
-  = f.simple_fields_for :transactions, obj do |t|
-    %div{:"data-transaction-type" => type, :"data-seller" => seller.name}
+- if transaction
+  = f.simple_fields_for :transactions, transaction do |t|
+    %div{:"data-transaction-type" => transaction.transaction_type, :"data-seller" => transaction.seller.name}
       = t.input :seller_id, :as => :hidden
       = t.input :transaction_type, :as => :hidden
       = t.input :amount, :label => false, input_html: { pattern: '\d*' }

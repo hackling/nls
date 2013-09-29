@@ -9,4 +9,9 @@ class Sale < ActiveRecord::Base
     totals.merge! self.transactions.group(:transaction_type).sum(:amount)
     totals
   end
+
+  # TODO: spec me
+  def transaction_for type, seller
+    transactions.find { |t| t.transaction_type == type && t.seller == seller }
+  end
 end
