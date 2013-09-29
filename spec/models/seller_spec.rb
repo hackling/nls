@@ -62,6 +62,16 @@ describe Seller do
 
     subject { Seller.where(name: seller_name).first.total_contributions }
 
+    context "all_total_contributions" do
+      it 'should return a hash with all contributions' do
+        expect(Seller.all_total_contributions).to eq( {
+          "Store" => BigDecimal.new("50.0"),
+          "Nick" => BigDecimal.new("125.0"),
+          "Will" => BigDecimal.new("25.0"),
+          } )
+      end
+    end
+
     context "the Store" do
       let(:seller_name) { "Store" }
 

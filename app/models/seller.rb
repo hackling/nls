@@ -4,6 +4,14 @@ class Seller < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  def self.all_total_contributions
+    contributions =  []
+    Seller.all.each do |seller|
+      contributions << [seller.name, seller.total_contributions]
+    end
+    Hash[contributions]
+  end
+
   def total_contributions
     if store?
       transactions.purchases.sum(:amount)
@@ -12,7 +20,6 @@ class Seller < ActiveRecord::Base
     end
   end
 
-  # TODO: spec me
   def self.store
     Seller.where(name: 'Store').first_or_create!
   end
@@ -23,7 +30,6 @@ class Seller < ActiveRecord::Base
 
   scope :partners, -> { where('name <> ?', 'Store') }
 
-  # TODO: spec me
   def self.for_sale_form
     [store] + partners
   end

@@ -21,7 +21,7 @@ def bd_hash hash
 end
 
 Then(/^The contributions should be$/) do |table|
-  expect(app.contributions).to eq bd_hash(table.rows_hash)
+  expect(app.contributions_hash).to eq bd_hash(table.rows_hash)
 end
 
 When(/^The store buys \$(\d+) worth of cards for \$(\d+)$/) do |value_gained, money_offered|

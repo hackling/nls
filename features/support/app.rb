@@ -13,9 +13,14 @@ module KnowsHowToSell
     end
 
     def contributions
+      @contributions ||= ContributionPage.new
+    end
+
+    def contributions_hash
+      contributions.load
       Hash[
         Seller.all.map do |seller|
-          [seller.name, seller.transactions.acquisitions.map(&:amount).sum]
+          [seller.name, contributions.contribution_for(seller.name)]
         end
       ]
     end
