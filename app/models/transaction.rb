@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  TRANSACTION_TYPES = %w[Buying Selling Trading]
+  TRANSACTION_TYPES = %w[Selling Trading Buying]
 
   belongs_to :seller
 
