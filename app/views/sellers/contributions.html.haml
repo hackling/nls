@@ -1,0 +1,11 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th Seller
+      %th Contribution
+      %th %
+  - @contributions.each do |name, contribution, percent|
+    %tr.contribution-data
+      %th.name= name
+      %td.contribution= contribution
+      %td.percent= percent.round(2)
