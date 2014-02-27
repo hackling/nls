@@ -11,15 +11,12 @@
         %tr
           %th Seller
           %th Sale
-          %th Trade
           %th Buy
       - Seller.for_sale_form.each do |seller|
         %tr
           %th= seller.name
           %td
             = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Selling', seller) }
-          %td
-            = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Trading', seller) }
           %td{:style => 'text-align: center;'}
             - if seller.store?
               = render partial: "sale_field", locals: { f: f, transaction: @sale.transaction_for('Buying', seller) }
@@ -28,8 +25,6 @@
       %tr.totals
         %td
         %td.total.selling
-          0
-        %td.total.trading
           0
         %td.total.buying
           0
@@ -47,7 +42,6 @@
 
     updateTotalsForType "Buying"
     updateTotalsForType "Selling"
-    updateTotalsForType "Trading"
 
     $('.amount input').keyup ->
       ttype = $(this).closest('[data-transaction-type]').data('transaction-type')
