@@ -11,4 +11,13 @@ class SalesController < InheritedResources::Base
       resource.transactions.build :seller => store, :transaction_type => 'Buying'
     end
   end
+
+  def create
+    @sale = Sale.new(params['sale'])
+    if @sale.save!
+      flash[:notice] = @sale.transaction_totals_flash_message
+      redirect_to new_sale_path
+      #update flash message
+    end
+  end
 end

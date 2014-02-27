@@ -10,6 +10,16 @@ class Sale < ActiveRecord::Base
     totals
   end
 
+  def transaction_totals_flash_message
+    output = 'Transaction Processed - '
+    transaction_totals.each do |type, amount|
+      output += "#{type} - $#{amount}    "
+    end
+    output
+  end
+
+  #add to string method for transaction totals
+
   # TODO: spec me
   def transaction_for type, seller
     transactions.find { |t| t.transaction_type == type && t.seller == seller }
