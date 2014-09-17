@@ -7,7 +7,7 @@ class SalesController < InheritedResources::Base
         resource.transactions.build :seller => seller, :transaction_type => tt
       end
     end
-    if store = Seller.find_by_name('Store')
+    unless !(store = Seller.find_by_name('Store'))
       resource.transactions.build :seller => store, :transaction_type => 'Buying'
     end
   end
